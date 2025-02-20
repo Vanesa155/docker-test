@@ -69,3 +69,65 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+# Doc App en Docker
+
+Este proyecto utiliza Docker para construir y correr una aplicación en Node.js con React.
+
+## Descripción
+
+El proceso comienza creando un `Dockerfile` basado en una imagen de Node.js de versión reciente. La aplicación se construye utilizando `npm install` y se ejecuta con el comando `npm start`. Para lograr esto, se modifica el `package.json` agregando el siguiente script:  
+json
+"start": "react-scripts start"
+## Construcción y Ejecución
+
+Para probar la aplicación localmente:
+
+1. Construye la imagen de Docker con el comando:
+
+    
+sh
+    docker build -t nede-image .
+    
+2. Corre el contenedor con:
+
+    
+sh
+    docker run -p 3000:3000 node-image
+    
+La aplicación utiliza el puerto `3000` porque es el puerto al que expone la app.
+
+## Acción de CI
+
+En la acción de CI se realizan los siguientes pasos:
+
+1. Se copia el código.
+2. Se monta en una imagen de Node.js.
+3. Se instalan las dependencias.
+4. Se ejecuta el `docker buildx`.
+5. Se accede al Docker Hub.
+6. Se construye la imagen en Docker Hub.
+
+![GitHub actions](img/actions%20done.png)
+
+
+### Consideraciones de Seguridad
+
+Se utilizan secretos para gestionar el acceso al Docker Hub, según la recomendación del profesor.
+
+![Secrets de github](img/secrets.png)
+
+### Imagen en Docker Hub
+
+La imagen creada en Docker Hub se llama `node-image`
+
+![Dockerhub](img/dockerhub.png)
+
+
+## <b> Autora </b>
+
++ [Gloria Vanesa](https://github.com/Vanesa155 "Vanesa V.")
+
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
